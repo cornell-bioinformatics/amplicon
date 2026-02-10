@@ -138,7 +138,7 @@ def main():
                 if ("__" not in sampleName):
                     continue
                 plateWell = sampleName.split("__")[1]
-                m= re.match("(.+)_\w{3}$", plateWell)
+                m= re.match("(.+)_\w{2,3}$", plateWell)
                 if m:
                     plate = m[1]
                 else:
@@ -231,7 +231,7 @@ def main():
             if ("__" not in sampleName):
                 continue
             plateWell = sampleName.split("__")[1]
-            m= re.match("(.+)_\w{3}$", plateWell)
+            m= re.match("(.+)_\w{2,3}$", plateWell)
             if m:
                 plate = m[1]
             else:
