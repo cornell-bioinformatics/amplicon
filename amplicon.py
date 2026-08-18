@@ -208,17 +208,17 @@ def main():
     primerfh = open(primerFile, "w")
     with open(args.key, 'r') as fhk:
         for line in fhk:
-            if (not re.search("\w", line)):
+            if (not re.search("\\w", line)):
                 continue
             line = line.rstrip()
             fieldArray = line.split(sep="\t")
             if (len(fieldArray) < 3):
                 print(f"Error: some row in the key file {args.key} have less than 3 columns!")
                 sys.exit()
-            markerName = re.sub("\W", "", fieldArray[0])
+            markerName = re.sub("\\W", "", fieldArray[0])
             markerList.append(markerName);
-            primer1 = re.sub("\W", "", fieldArray[1])
-            primer2 = re.sub("\W", "", fieldArray[2])
+            primer1 = re.sub("\\W", "", fieldArray[1])
+            primer2 = re.sub("\\W", "", fieldArray[2])
             if primerOri==1:
                 primer2 = revcom(primer2);
             if (inputMode==1) or (inputMode==3):
@@ -237,7 +237,7 @@ def main():
         countSampleFile = 0
         with open(args.sample, 'r') as fhs:
             for line in fhs:
-                if (not re.search("\w", line)):
+                if (not re.search("\\w", line)):
                     continue
                 line = line.rstrip()
                 fieldArray = line.split(sep="\t")
