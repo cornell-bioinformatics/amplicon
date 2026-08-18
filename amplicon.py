@@ -3,7 +3,7 @@
 import logging
 from os import listdir
 from os.path import isfile, join
-import distutils.spawn
+from shutil import which
 import argparse
 from pathlib import Path
 import os
@@ -119,7 +119,7 @@ def main():
         sys.exit()
         
     #check dependency
-    if distutils.spawn.find_executable("bbmerge.sh") is None:
+    if which ("bbmerge.sh") is None:
         if os.path.isfile("/programs/bbmap-38.45/bbmerge.sh"):
             #cornell biohpc path to bbmap software
             bbmergeCMD= "/programs/bbmap-38.45/bbmerge.sh"
@@ -129,7 +129,7 @@ def main():
         else:
             print("bbmap is not needed for this mode.")
 
-    if distutils.spawn.find_executable(cutadaptCMD) is None:
+    if which (cutadaptCMD) is None:
         print("cutadapt is required for paired-end data. It must be in $PATH")
         sys.exit()
 
