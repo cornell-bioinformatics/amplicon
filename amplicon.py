@@ -1215,6 +1215,8 @@ def main_collapse(inp,ouf):
 ########### end of  PCR error correction code #################################
 
 if __name__=="__main__":
+    if sys.platform == "darwin":
+        multiprocessing.set_start_method("fork")
     main()
 
 
