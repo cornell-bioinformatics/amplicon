@@ -208,17 +208,17 @@ def main():
     primerfh = open(primerFile, "w")
     with open(args.key, 'r') as fhk:
         for line in fhk:
-            if (not re.search("\\w", line)):
+            if (not re.search(r"\w", line)):
                 continue
             line = line.rstrip()
             fieldArray = line.split(sep="\t")
             if (len(fieldArray) < 3):
                 print(f"Error: some row in the key file {args.key} have less than 3 columns!")
                 sys.exit()
-            markerName = re.sub("\\W", "", fieldArray[0])
+            markerName = re.sub(r"\W", "", fieldArray[0])
             markerList.append(markerName);
-            primer1 = re.sub("\\W", "", fieldArray[1])
-            primer2 = re.sub("\\W", "", fieldArray[2])
+            primer1 = re.sub(r"\W", "", fieldArray[1])
+            primer2 = re.sub(r"\W", "", fieldArray[2])
             if primerOri==1:
                 primer2 = revcom(primer2);
             if (inputMode==1) or (inputMode==3):
@@ -237,12 +237,12 @@ def main():
         countSampleFile = 0
         with open(args.sample, 'r') as fhs:
             for line in fhs:
-                if (not re.search("\\w", line)):
+                if (not re.search(r"\w", line)):
                     continue
                 line = line.rstrip()
                 fieldArray = line.split(sep="\t")
-                sampleName = re.sub("\s", "", fieldArray[0])
-                plateWell = re.sub("\s", "", fieldArray[1])
+                sampleName = re.sub(r"\s", "", fieldArray[0])
+                plateWell = re.sub(r"\s", "", fieldArray[1])
                 countSampleFile +=1
                 
                 if (args.mergeDuplicate == 0):
@@ -286,7 +286,7 @@ def main():
 
         with open(args.sample, 'r') as fhs:
             for line in fhs:
-                if (not re.search("\w", line)):
+                if (not re.search(r"\w", line)):
                     continue
                 line = line.rstrip()
                 fieldArray = line.split(sep="\t")
@@ -294,8 +294,8 @@ def main():
                     print(f"Error: In mode 1, sample file must have at least four columns, and with no header line. Single-end reads are not supported now. Will be added later")
                     sys.exit()
 
-                sampleName = re.sub("\s", "", fieldArray[0]).strip()
-                plateWell = re.sub("\s", "", fieldArray[1]).strip()
+                sampleName = re.sub(r"\s", "", fieldArray[0]).strip()
+                plateWell = re.sub(r"\s", "", fieldArray[1]).strip()
 
                 if (args.mergeDuplicate == 0):
                     if sampleName != plateWell:
@@ -325,7 +325,7 @@ def main():
     if (inputMode==2):
         with open(args.sample, 'r') as fhs:
             for line in fhs:
-                if (not re.search("\w", line)):
+                if (not re.search(r"\w", line)):
                     continue
                 line = line.rstrip()
                 fieldArray = line.split(sep="\t")
@@ -333,8 +333,8 @@ def main():
                     print(f"Error: In mode 2, sample file must have at least two columns, and with no header line. Single-end reads are not supported now. Will be added later")
                     sys.exit()
 
-                sampleName = re.sub("\s", "", fieldArray[0])
-                fileName = re.sub("\s", "", fieldArray[1])
+                sampleName = re.sub(r"\s", "", fieldArray[0])
+                fileName = re.sub(r"\s", "", fieldArray[1])
 
                 if ((not os.path.isfile(fileName)) and  ("1" not in args.skip)):
                     print(f"Error: Sample fastq file {fileName} does not exist!")
@@ -354,12 +354,12 @@ def main():
         countSampleFile = 0
         with open(args.sample, 'r') as fhs:
             for line in fhs:
-                if (not re.search("\w", line)):
+                if (not re.search(r"\w", line)):
                     continue
                 line = line.rstrip()
                 fieldArray = line.split(sep="\t")
-                sampleName = re.sub("\s", "", fieldArray[0])
-                plateWell = re.sub("\s", "", fieldArray[1])
+                sampleName = re.sub(r"\s", "", fieldArray[0])
+                plateWell = re.sub(r"\s", "", fieldArray[1])
                 countSampleFile +=1
                 
                 if (args.mergeDuplicate == 0):
@@ -399,7 +399,7 @@ def main():
 
         with open(args.sample, 'r') as fhs:
             for line in fhs:
-                if (not re.search("\w", line)):
+                if (not re.search(r"\w", line)):
                     continue
                 line = line.rstrip()
                 fieldArray = line.split(sep="\t")
@@ -407,8 +407,8 @@ def main():
                     print(f"Error: In mode 3, sample file must have at least three columns, and with no header line.")
                     sys.exit()
 
-                sampleName = re.sub("\s", "", fieldArray[0])
-                plateWell = re.sub("\s", "", fieldArray[1])
+                sampleName = re.sub(r"\s", "", fieldArray[0])
+                plateWell = re.sub(r"\s", "", fieldArray[1])
 
                 if (args.mergeDuplicate == 0):
                     if sampleName!=plateWell:
@@ -974,7 +974,7 @@ def callHapGenotypes():
 
 def revcom(inputSeq):
     complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'N':'N'} 
-    seq = re.sub("\s", '', inputSeq.upper())
+    seq = re.sub(r"\s", '', inputSeq.upper())
     seq = re.sub("[^ACGT]", 'N', seq)
     bases = list(seq[::-1]) 
     bases = [complement[base] for base in bases] 
